@@ -41,14 +41,14 @@
      let remain_delay = push_delay;
      (async () => {
          for(let i = 0; i <= question_text.length; ++i){
-             question_elm.textContent = question_text.slice(0,i);
-             if(is_pushed){
-                 if(remain_delay > 0){
-                     --remain_delay;
-                 }else{
-                     break;
+             put_question(question_text.slice(0,i));
+                 if(is_pushed){
+                     if(remain_delay > 0){
+                         --remain_delay;
+                     }else{
+                         break;
+                     }
                  }
-             }
              await sleep(ms);
          }
          after_pushed();
@@ -60,13 +60,17 @@
      say_question(question_str, sleep_ms);
  }
 
- function say_answer(answer){
+ function put_question(question){
+     document.getElementById("question").textContent = question;
+ }
+
+ function put_answer(answer){
      document.getElementById("answer").textContent = answer;
  }
 
  function initialize(){
-     say_question("", 0);
-     say_answer(`TIME: ${thinking_time}`);
+     put_question("");
+     put_answer(`TIME: ${thinking_time}`);
      is_pushed = false;
  }
 
@@ -91,7 +95,7 @@
              answer_elm.textContent = `TIME: ${i}`;
              await sleep(1000);
          }
-         say_answer(answer_str);
+         put_answer(answer_str);
      })();
 
  }
