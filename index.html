@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ja-jp">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>ヒトリハヤオシ</title>
+        <link href="main.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div id="question">
+            
+        </div>
+        <div id="answer">
+            エテルノ
+        </div>
+        <button onclick="show_question()">問題開始</button>
+        <button onclick="push_button()">早押しボタン</button>
+        <button onclick="clear_question()">Clear</button>
+        <br/>
+        delay: <span id="now_sleep_ms">100</span> [ms]
+        <br/>
+        change delay: <input id="input_sleep_ms" type="number" value="100"/> <button onclick="change_sleep_ms()">change</button>
+    </body>
+</html>
+
+<script>
+ let question_str = "阪急阪神東宝グループ運営のお葬式のサービス業を主とする会社名と、ゲーム『スクールガールストライカーズ』で舞台となる拠点に共通する、イタリア語で「永遠」という意味がある言葉は何でしょう？";
+ let sleep_ms = 10;
+
+ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+ function change_question_elm(question_text, ms){
+     let question_elm = document.getElementById('question');
+     (async () => {
+         for(let i = 0; i <= question_text.length; ++i){
+             question_elm.textContent = question_text.slice(0,i);
+             await sleep(ms);
+             }
+         }
+     )();
+ }
+
+ function show_question(){
+     change_question_elm(question_str, sleep_ms);
+ }
+
+ function clear_question(){
+     change_question_elm("", 0);
+ }
+
+ function push_button(){
+     console.log("!");
+ }
+
+ function change_sleep_ms(){
+     sleep_ms = document.getElementById("input_sleep_ms").value;
+     document.getElementById("now_sleep_ms").textContent = sleep_ms;
+ }
+
+</script>
