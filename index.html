@@ -46,12 +46,12 @@
                  if(remain_delay > 0){
                      --remain_delay;
                  }else{
-                     after_pushed();
                      break;
                  }
              }
              await sleep(ms);
          }
+         after_pushed();
      })();
  }
 
@@ -60,8 +60,13 @@
      say_question(question_str, sleep_ms);
  }
 
+ function say_answer(answer){
+     document.getElementById("answer").textContent = answer;
+ }
+
  function initialize(){
      say_question("", 0);
+     say_answer(`TIME: ${thinking_time}`);
      is_pushed = false;
  }
 
@@ -83,10 +88,12 @@
      answer_elm = document.getElementById("answer");
      (async () => {
          for(let i = thinking_time; i >= 0; --i){
-             answer_elm.textContent = i;
+             answer_elm.textContent = `TIME: ${i}`;
              await sleep(1000);
          }
+         say_answer(answer_str);
      })();
+
  }
 
 </script>
