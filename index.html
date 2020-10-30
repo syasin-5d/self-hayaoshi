@@ -12,7 +12,7 @@
         </div>
         <button onclick="show_question()">問題開始</button>
         <button onclick="push_button()">早押しボタン</button>
-        <button onclick="clear_question()">Clear</button>
+        <button onclick="initialize()">Clear</button>
         <br/>
         <ul>
             <li>文字表示遅延: <span id="now_sleep_ms">100</span> [ms]</li>
@@ -36,7 +36,7 @@
  let thinking_time = 5; // [s]
 
 
- function change_question_elm(question_text, ms){
+ function say_question(question_text, ms){
      let question_elm = document.getElementById('question');
      let remain_delay = push_delay;
      (async () => {
@@ -56,12 +56,12 @@
  }
 
  function show_question(){
-     clear_question();
-     change_question_elm(question_str, sleep_ms);
+     initialize();
+     say_question(question_str, sleep_ms);
  }
 
- function clear_question(){
-     change_question_elm("", 0);
+ function initialize(){
+     say_question("", 0);
      is_pushed = false;
  }
 
