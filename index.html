@@ -28,15 +28,19 @@
 
  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+ let is_pushed = false;
+
  function change_question_elm(question_text, ms){
      let question_elm = document.getElementById('question');
      (async () => {
          for(let i = 0; i <= question_text.length; ++i){
              question_elm.textContent = question_text.slice(0,i);
-             await sleep(ms);
+             if(is_pushed){
+                 break;
              }
+             await sleep(ms);
          }
-     )();
+     })();
  }
 
  function show_question(){
@@ -45,10 +49,11 @@
 
  function clear_question(){
      change_question_elm("", 0);
+     is_pushed = false;
  }
 
  function push_button(){
-     console.log("!");
+     is_pushed = true;
  }
 
  function change_sleep_ms(){
