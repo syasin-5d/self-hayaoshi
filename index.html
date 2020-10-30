@@ -7,7 +7,6 @@
     </head>
     <body>
         <div id="question">
-            
         </div>
         <div id="answer">
             エテルノ
@@ -16,27 +15,37 @@
         <button onclick="push_button()">早押しボタン</button>
         <button onclick="clear_question()">Clear</button>
         <br/>
-        delay: <span id="now_sleep_ms">100</span> [ms]
-        <br/>
-        change delay: <input id="input_sleep_ms" type="number" value="100"/> <button onclick="change_sleep_ms()">change</button>
+        <ul>
+            <li>文字表示遅延: <span id="now_sleep_ms">100</span> [ms]</li>
+            <li>文字表示遅延の変更 (0を設定すると一瞬で問題文が表示されます):<br/>
+                <input id="input_sleep_ms" type="number" value="100"/> <button onclick="change_sleep_ms()">change</button></li>
+            <li>読ませ押し文字数: <span id="now_push_delay">2</span></li>
+            <li>読ませ押し文字数の変更 (早押しボタンを押した時点から指定した文字数分表示します):<br/>
+                <input id="input_push_delay" type="number" value="2"/> <button onclick="change_push_delay()">change</button></li>
+        </ul>
     </body>
 </html>
 
 <script>
- let question_str = "阪急阪神東宝グループ運営のお葬式のサービス業を主とする会社名と、ゲーム『スクールガールストライカーズ』で舞台となる拠点に共通する、イタリア語で「永遠」という意味がある言葉は何でしょう？";
- let sleep_ms = 10;
-
  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+ let question_str = "阪急阪神東宝グループ運営のお葬式のサービス業を主とする会社名と、ゲーム『スクールガールストライカーズ』で舞台となる拠点に共通する、イタリア語で「永遠」という意味がある言葉は何でしょう？";
+ let sleep_ms = 10; // [ms]
  let is_pushed = false;
+ let push_delay = 2; // [文字]
 
  function change_question_elm(question_text, ms){
      let question_elm = document.getElementById('question');
+     let remain_delay = push_delay;
      (async () => {
          for(let i = 0; i <= question_text.length; ++i){
              question_elm.textContent = question_text.slice(0,i);
              if(is_pushed){
-                 break;
+                 if(push_delay > 0){
+                     --push_delay;
+                 }else{
+                     break;
+                 }
              }
              await sleep(ms);
          }
@@ -44,6 +53,7 @@
  }
 
  function show_question(){
+     clear_question();
      change_question_elm(question_str, sleep_ms);
  }
 
@@ -59,6 +69,11 @@
  function change_sleep_ms(){
      sleep_ms = document.getElementById("input_sleep_ms").value;
      document.getElementById("now_sleep_ms").textContent = sleep_ms;
+ }
+
+ function change_push_delay(){
+     push_delay = document.getElementById("input_push_delay").value;
+     document.getElementById("now_push_delay").textContent = push_delay;
  }
 
 </script>
