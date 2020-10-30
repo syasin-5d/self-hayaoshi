@@ -7,6 +7,8 @@
 
     </head>
     <body>
+        <h1>ヒトリハヤオシ</h1>
+        <section id="main">
         <div id="question">
         </div>
         <div id="answer">
@@ -14,7 +16,8 @@
         <button onclick="show_question()">問題開始</button>
         <button onclick="push_button()">早押しボタン</button>
         <button onclick="initialize()">Clear</button>
-        <br/>
+        </section>
+        <section id="options">
         <ul>
             <li>文字表示遅延: <span id="now_sleep_ms">100</span> [ms]</li>
             <li>文字表示遅延の変更 (0を設定すると一瞬で問題文が表示されます):<br/>
@@ -28,7 +31,7 @@
                 <li>現在の問題番号: <span id="current_question_number">0</span>/<span id="num_of_questions">0</span></li>
 
         </ul>
-
+        </section>
         <script type="text/javascript" src="main.js"></script>
         <script type="text/javascript" src="read_csv.js"></script>
     </body>

@@ -7,13 +7,26 @@ body{
 
 }
 
-div#question, div#answer{
+h1{
+    text-align: center;
+}
+
+#main {
+    padding-bottom: 20px;
+    border-bottom: 1px white solid;
+}
+
+#options li{
+    margin: 10px 0;
+}
+
+#question, #answer{
     padding: 10px;
-    margin: 10px;
+    margin: 10px 0;
     border: 1px solid white;
 }
 
-div#answer{
+#answer{
     text-align: right;
 }
 
