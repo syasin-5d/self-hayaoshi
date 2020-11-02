@@ -1,5 +1,4 @@
-import('./read_csv.js');
-
+// import('./read_csv.js');
 
 const sleep = (ms :number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -44,9 +43,7 @@ function set_question_and_answer(csv_array :string[][], num :number){
     // number is 1-based instead of 0-based index
     question_str = csv_array[num-1][0];
     answer_str = csv_array[num-1][1];
-
 }
-
 
 function put_question(question :string){
     document.getElementById("question")!.textContent = question;
@@ -82,8 +79,6 @@ function change_question_number(){
     set_question_and_answer(csv_array, question_number);
 }
 
-
-
 function after_pushed(){
     let answer_elm :Element | null = document.getElementById("answer");
     (async () => {
@@ -98,7 +93,5 @@ function after_pushed(){
         }
         put_answer(answer_str);
     })();
-
-
 }
 
