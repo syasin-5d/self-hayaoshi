@@ -1,5 +1,3 @@
-// import('./read_csv.js');
-
 const sleep = (ms :number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 let question_str :string = "阪急阪神東宝グループ運営のお葬式のサービス業を主とする会社名と、ゲーム『スクールガールストライカーズ』で舞台となる拠点に共通する、イタリア語で「永遠」という意味がある言葉は何でしょう？";
