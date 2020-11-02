@@ -26,7 +26,12 @@ h1{
     border: 1px solid white;
 }
 
+#question {
+    height: calc(1.6em * 3);
+}
+
 #answer{
+    height: calc(1.6em * 1);
     text-align: right;
 }
 
