@@ -44,22 +44,16 @@ function set_question_and_answer(csv_array :string[][], num :number){
     // number is 1-based instead of 0-based index
     question_str = csv_array[num-1][0];
     answer_str = csv_array[num-1][1];
+
 }
 
 
 function put_question(question :string){
-    let question_elm :Element | null = document.getElementById("question")
-    if (question_elm != null){
-        question_elm.textContent = question;
-    }
+    document.getElementById("question")!.textContent = question;
 }
 
 function put_answer(answer :string){
-    let answer_elm :Element | null = document.getElementById("answer")
-    if (answer_elm){
-        answer_elm.textContent = answer;
-    }
-
+    document.getElementById("answer")!.textContent = answer;
 }
 
 function initialize(){
@@ -73,29 +67,18 @@ function push_button(){
 }
 
 function change_sleep_ms(){
-    let input_sleep_ms_elm :HTMLInputElement | null = document.getElementById("input_sleep_ms") as HTMLInputElement;
-    let now_sleep_ms_elm :Element | null = document.getElementById("now_sleep_ms");
-    if (input_sleep_ms_elm != null && now_sleep_ms_elm != null){
-        let sleep_ms :number = parseInt(input_sleep_ms_elm.value);
-        now_sleep_ms_elm.textContent = sleep_ms.toString();
-    }
+    let sleep_ms :number = parseInt((document.getElementById("input_sleep_ms") as HTMLInputElement).value);
+    document.getElementById("now_sleep_ms")!.textContent = sleep_ms.toString();
 }
 
 function change_push_delay(){
-    let push_delay_elm :HTMLInputElement | null = document.getElementById("input_push_delay") as HTMLInputElement;
-    let now_push_delay_elm :Element | null = document.getElementById("now_push_delay")
-    if (push_delay_elm != null && now_push_delay_elm != null){
-        push_delay_elm.value;
-        now_push_delay_elm.textContent = push_delay.toString();
-    }
+    let push_delay :number = parseInt((document.getElementById("input_push_delay") as HTMLInputElement).value);
+    document.getElementById("now_push_delay")!.textContent = push_delay.toString();
 }
 
 function change_question_number(){
     let question_number :number = parseInt((document.getElementById("input_question_number") as HTMLInputElement).value);
-    let current_question_number_elm :Element | null = document.getElementById('current_question_number')
-    if (current_question_number_elm != null){
-        current_question_number_elm.textContent = question_number.toString();
-    }
+    document.getElementById('current_question_number')!.textContent = question_number.toString();
     set_question_and_answer(csv_array, question_number);
 }
 
@@ -103,19 +86,19 @@ function change_question_number(){
 
 function after_pushed(){
     let answer_elm :Element | null = document.getElementById("answer");
-    if (answer_elm != null){
-        (async () => {
-            for(let i = thinking_time; i >= 0 && is_pushed <= 1; --i){
-                answer_elm.textContent = `TIME: ${i}`;
-                for (let iter = 0; iter < sleep_delta; ++iter){
-                    if(is_pushed >= 2){
-                        break;
-                    }
-                    await sleep(1000 / sleep_delta);
+    (async () => {
+        for(let i = thinking_time; i >= 0 && is_pushed <= 1; --i){
+            answer_elm!.textContent = `TIME: ${i}`;
+            for (let iter = 0; iter < sleep_delta; ++iter){
+                if(is_pushed >= 2){
+                    break;
                 }
+                await sleep(1000 / sleep_delta);
             }
-            put_answer(answer_str);
-        })();
-    }
+        }
+        put_answer(answer_str);
+    })();
+
+
 }
 
